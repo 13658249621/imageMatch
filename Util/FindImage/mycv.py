@@ -1,27 +1,27 @@
+import cv2 as cv
 import numpy as np
-import cv2
+from matplotlib import pyplot as plt
 
-src = cv2.imread("/Users/timo/Downloads/Wechatbig.png")
-Temp = cv2.imread("/Users/timo/Downloads/wesmall.png")
-
-src = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY)
-temp = cv2.cvtColor(Temp, cv2.COLOR_RGB2GRAY)
-height, width = src.shape
-H, W = temp.shape
-print(H, W)
-methods = [cv2.TM_CCOEFF_NORMED]
-for method in methods:
-    src2 = src.copy()
-    result = cv2.matchTemplate(src2, temp, method)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    print(min_loc, max_loc)
-    print(min_val, max_val)
-    if method in [cv2.TM_SQDIFF, cv2.TM_CCORR]:
-        lacation = min_loc
+img = cv.imread('/Users/timo/Downloads/hotelMain.jpeg', 0)
+img2 = img.copy()
+template = cv.imread('/Users/timo/Downloads/locate.png', 0)
+w, h = template.shape[::-1]
+# 列表中所有的6种比较方法
+methods = ['cv.TM_CCOEFF', 'cv.TM_CCOEFF_NORMED', 'cv.TM_CCORR',
+           'cv.TM_CCORR_NORMED', 'cv.TM_SQDIFF', 'cv.TM_SQDIFF_NORMED']
+for meth in methods:
+    img = img2.copy()
+    method = eval(meth)
+    # 应用模板匹配
+    res = cv.matchTemplate(img, template, method)
+    min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)
+    # 如果方法是TM_SQDIFF或TM_SQDIFF_NORMED，则取最小值
+    if method in [cv.TM_SQDIFF, cv.TM_SQDIFF_NORMED]:
+        top_left = min_loc
     else:
-        location = max_loc
-    bottom_right = (location[0] + W, location[1] + H)
-    cv2.rectangle(src2, location, bottom_right, 255, 5)
-    cv2.imshow("output", src2)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+        top_left = max_loc
+    bottom_right = (top_left[0] + w, top_left[1] + h)
+    cv.rectangle(img, top_left, bottom_right, 255, 2)
+    cv.imshow('Rainforest', img)
+    cv.waitKey(0)
+    cv.destroyAllWindows()

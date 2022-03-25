@@ -5,7 +5,7 @@
 import cv2
 import numpy as np
 
-MIN_MATCH_COUNT = 10
+MIN_MATCH_COUNT = 5
 img1 = cv2.imread('/Users/timo/Downloads/hotelMain.jpeg')  # queryImage
 img2 = cv2.imread('/Users/timo/Downloads/locate.png')  # trainImage
 
@@ -71,7 +71,3 @@ if __name__ == '__main__':
     cv2.imshow('result.py', result)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    cv2.waitKey(1)
-    cv2.waitKey(1)
-    cv2.waitKey(1)
-    cv2.waitKey(1)
