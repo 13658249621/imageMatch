@@ -120,9 +120,13 @@ def feature_matching(templatePicPath, targetPicPath):
     indexParams = dict(algorithm=0, trees=10)
     searchParams = dict(checks=50)
     flann = cv2.FlannBasedMatcher(indexParams, searchParams)
-    # 使用KNN算法实现图像匹配，返回最佳的k个匹配,并对匹配结果排序
+    # 使用KNN算法实现图像匹配，返回最佳的k个匹配,KnnMatch与match的返回值类型一样，只不过一组返回的俩个DMatch类型：
     matches = flann.knnMatch(des1, des2, k=2)
-    
+    # matches是DMatch对象，具有以下属性：
+    # DMatch.distance - 描述符之间的距离。 越低越好。
+    # DMatch.trainIdx - 训练描述符中描述符的索引
+    # DMatch.queryIdx - 查询描述符中描述符的索引
+    # DMatch.imgIdx - 训练图像的索引。
 
     """
     去除错误匹配，0.5是系数，系数大小不同，匹配的结果页不同

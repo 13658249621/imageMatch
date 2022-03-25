@@ -4,8 +4,8 @@ import cv2
 from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 5  # 设置最低特征点匹配数量为10
-template = cv2.imread('/Users/timo/Downloads/主页.jpeg', 0)  # queryImage
-target = cv2.imread('/Users/timo/Downloads/主页2.png', 0)  # trainImage
+template = cv2.imread('/Users/timo/Downloads/hotelMain.jpeg', 0)  # queryImage
+target = cv2.imread('/Users/timo/Downloads/酒店品牌馆.png', 0)  # trainImage
 # Initiate SIFT detector创建sift检测器
 sift = cv2.xfeatures2d.SIFT_create()
 # find the keypoints and descriptors with SIFT

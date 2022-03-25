@@ -1,10 +1,9 @@
 import cv2
 
-
 # 特征点匹配,已成功获取坐标
 def feature_matching():
-    tem = cv2.imread('/Users/timo/Downloads/Wechatbig.png')
-    tar = cv2.imread('/Users/timo/Downloads/wesmall.png')
+    tem = cv2.imread('/Users/timo/Downloads/小程序.jpeg')
+    tar = cv2.imread('/Users/timo/Downloads/我的.png')
 
     # 使用SIFT算法获取图像特征的关键点和描述符
     sift = cv2.xfeatures2d.SIFT_create()
@@ -20,6 +19,8 @@ def feature_matching():
     flann = cv2.FlannBasedMatcher(indexParams, searchParams)
     # 使用KNN算法实现图像匹配，并对匹配结果排序
     matches = flann.knnMatch(des1, des2, k=2)
+
+
 
     # 去除错误匹配，0.5是系数，系数大小不同，匹配的结果页不同
     goodMatches = []
