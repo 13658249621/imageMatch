@@ -5,7 +5,7 @@ import cv2
 
 
 def index_view(request):
-    BASE_PIC_DIR = '/Users/timo/PycharmProjects/AirTest/HelloWorld/media/'
+    BASE_PIC_DIR = '/Users/timo/PycharmProjects/imageMatch/HelloWorld/media'
     picNameArray = ['template.png', 'target.png']
     if request.method == 'GET':
         return render(request, 'up.html')
